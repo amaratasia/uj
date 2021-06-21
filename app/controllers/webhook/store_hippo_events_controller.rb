@@ -12,6 +12,6 @@ class Webhook::StoreHippoEventsController < ApplicationController
 	end
 
 	def store_hippo_params
-		{event_name: 'order_create', data: params)
+		{event_name: 'order_create', data: params}
 	end
 end
