@@ -1,0 +1,2 @@
+class StoreHippoEvent < ApplicationRecord
+end
