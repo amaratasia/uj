@@ -3,7 +3,7 @@ class Webhook::StoreHippoEventsController < ApplicationController
     skip_before_action :verify_authenticity_token
 
 	def create
-		lms_params && lms = StoreHippoEvent.new(store_hippo_params)
+		store_hippo_params && lms = StoreHippoEvent.new(store_hippo_params)
 		if lms.save
 			render json: { success: true, data: lms.as_json }.to_json, status: :ok
 		else
