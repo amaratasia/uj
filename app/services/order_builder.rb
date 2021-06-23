@@ -54,7 +54,6 @@ class OrderBuilder
       product_obj = item['product']
       
       product = Product.find_or_initialize_by(store_pid: product_obj['_id'])
-      puts "Search #{product_obj['_id']}....#{product.id}"
       if product.new_record?
         product.sku = product_obj['sku']
         product.store_product_id = product_obj['id']
@@ -77,8 +76,6 @@ class OrderBuilder
         variant_obj.value = variant['options'].join(', ')
         variant_obj.save!
       end
-      puts 'product.id'
-      puts product.id
       product_obj['attributes'].each do |attribute|
         product.product_attributes.find_or_create_by(name: attribute['name'], value: attribute['value'])
       end
