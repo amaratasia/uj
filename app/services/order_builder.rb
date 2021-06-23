@@ -63,8 +63,8 @@ class OrderBuilder
         product.price = product_obj['price']
         product.images = product_obj['images'].map { |img| Image.new(url: img['tempSrc']) }
 
-        school_attr = product_obj['attributes'].find { |attribute| attribute['name'] == 'School' }&.value
-        product.school = School.find_or_create_by(name: school_attr) if school_attr
+        school_attr = product_obj['attributes'].find { |attribute| attribute['name'] == 'School' }
+        product.school = School.find_or_create_by(name: school_attr['value']) if school_attr && school_attr['value']
 
         product.save!
       end
