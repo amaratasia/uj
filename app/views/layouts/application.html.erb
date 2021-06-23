@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Uj</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Uniform Junction</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-        <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag asset_path('https://cdn.shopify.com/s/files/1/0355/9813/9436/files/S_New_logo-03_32x32.png') %>
   </head>
 
   <body>
-    <%= yield %>
+    <%= render 'shared/navbar' %>
+    <div class="container">
+      <% flash.each do |key, message| %>
+      <br>
+        <p class="alert <%= flash_class(key) %>"><%= message %></p>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>

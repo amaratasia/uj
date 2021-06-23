@@ -1,0 +1,21 @@
+<h1> Order by State</h1>
+<%= form_tag(tracking_details_reports_path, method: 'get') do %>
+From
+  <%= date_field('orders','min', min: '2015-05-20', max: Date.today, value: params[:orders] && params[:orders][:min]) %>
+  To
+  <%= date_field('orders','max', min: '2015-05-20', max: Date.today, value: params[:orders] && params[:orders][:max]) %>
+  <%= submit_tag('Search') %>
+<% end %>
+<br>
+<table>
+  <table>
+    <th class='col-md-6'>Status</th>
+    <th class='col-md-2'>Count</th>
+    <% @orders.each do |order| %>
+    <tr>
+      <td style='vertical-align:top'><%= order.status %></td>
+      <td style='vertical-align:top'><%= link_to order.count, orders_path(status: order.status), target: "_blank" %></td>
+    </tr>
+    <% end %>
+  </table>
+</table>

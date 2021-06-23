@@ -31,13 +31,11 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'aws-sdk'
 gem 'devise'
-gem 'shopify_api'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
 gem 'bootstrap-sass'
-
 gem 'httparty'
 
 # Use Capistrano for deployment

@@ -1,0 +1,21 @@
+<h1> Order by State</h1>
+<%= form_tag(zip_reports_path, method: 'get') do %>
+From
+  <%= date_field('address','min', min: '2020-05-05', max: Date.today, value: params[:orders] && params[:orders][:min]) %>
+  To
+  <%= date_field('address','max', min: '2020-05-05', max: Date.today, value: params[:orders] && params[:orders][:max]) %>
+  <%= submit_tag('Search') %>
+<% end %>
+<br>
+<table>
+  <table>
+    <th class='col-md-6'>Status</th>
+    <th class='col-md-2'>Count</th>
+    <% @address.each do |address| %>
+    <tr>
+      <td style='vertical-align:top'><%= address.zip %></td>
+      <td style='vertical-align:top'><%= link_to address.count, orders_path(zip: address.zip), target: "_blank" %></td>
+    </tr>
+    <% end %>
+  </table>
+</table>

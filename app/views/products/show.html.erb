@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>InternalID:</strong>
+  <%= @product.shopify_id %>
+</p>
+
+<p>
+  <h3>Title:
+  <%= @product.title %>
+</h3>
+</p>
+<p>
+  <strong>School Name:</strong>
+  <%= @product.school_name %>
+</p>
+<p>
+  <strong>Variants:</strong><br>
+  <%= @product.variants.pluck(:title).join(', ') %>
+</p>
+<p>
+  <strong>Body:</strong>
+  <%= @product.body.gsub("<br><br>", "").html_safe %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @product.status || "NA" %>
+</p>
+
+<p>
+  <strong>Image:</strong><br>
+  <%= @product.image && image_tag(@product.image, size: "160") %>
+</p>
+
+<%= link_to 'Back', products_path %>

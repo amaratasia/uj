@@ -1,19 +1,19 @@
 --- 
 default: 
   adapter: postgresql
-  database: "<%= ENV.fetch('DB_NAME') { 'schoolay_development' } %>"
+  database: "<%= ENV.fetch('DB_NAME') { 'uj_development' } %>"
   pool: "<%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>"
   port: 5432
   timeout: 5000
 development: 
   adapter: postgresql
-  database: "<%= ENV.fetch('DB_NAME') { 'schoolay_development' } %>"
+  database: "<%= ENV.fetch('DB_NAME') { 'uj_development' } %>"
   pool: "<%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>"
   port: 5432
   timeout: 5000
 production: 
   adapter: postgresql
-  database: "<%= ENV.fetch('DB_NAME') { 'schoolay_development' } %>"
+  database: "<%= ENV.fetch('DB_NAME') { 'uj_development' } %>"
   pool: "<%= ENV.fetch('RAILS_MAX_THREADS') { 5 } %>"
   port: 5432
   timeout: 5000
