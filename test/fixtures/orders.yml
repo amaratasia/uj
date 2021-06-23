@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  store_order_id: 1
+  subtotal: 9.99
+  shipping_total: 9.99
+  status: MyString
+  payment: MyString
+  seller: one
+
+two:
+  store_order_id: 1
+  subtotal: 9.99
+  shipping_total: 9.99
+  status: MyString
+  payment: MyString
+  seller: two

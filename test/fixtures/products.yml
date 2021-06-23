@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  store_product_id: 1
+  store_pid: 1
+  sku: MyString
+  name: MyString
+  description: MyString
+  price: 9.99
+  school: one
+
+two:
+  store_product_id: 1
+  store_pid: 1
+  sku: MyString
+  name: MyString
+  description: MyString
+  price: 9.99
+  school: two
