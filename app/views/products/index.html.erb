@@ -16,7 +16,6 @@
     <tr>
       <th>Title</th>
       <th>Body</th>
-      <th>Status</th>
       <th>School Name</th>
       <th colspan="1"> Action</th>
     </tr>
@@ -25,10 +24,9 @@
   <tbody>
     <% @products.each do |product| %>
       <tr>
-        <td><%= truncate(product.title, :length => 60) %></td>
-        <td><%= truncate(product.body.html_safe, :length => 50) %></td>
-        <td><%= product.status&.humanize %></td>
-        <td><%= product.school_name %></td>
+        <td><%= truncate(product.name, :length => 60) %></td>
+        <td><%= truncate(product.description.html_safe, :length => 50) %></td>
+        <td><%= product.school&.name %></td>
         <td><%= link_to 'Show', product %></td>
       </tr>
     <% end %>
@@ -36,4 +34,4 @@
 </table>
 
 <br>
-<%== @pagy.next && pagy_bootstrap_nav(@pagy) %>
+<%#== @pagy.next && pagy_bootstrap_nav(@pagy) %>

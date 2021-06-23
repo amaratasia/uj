@@ -52,14 +52,16 @@ class OrderBuilder
     order_items = []
     items.each do |item|
       product_obj = item['product']
+      
       product = Product.find_or_initialize_by(store_pid: product_obj['_id'])
+      puts "Search #{product_obj['_id']}....#{product.id}"
       if product.new_record?
         product.sku = product_obj['sku']
         product.store_product_id = product_obj['id']
         product.name = product_obj['name']
         product.description = product_obj['description']
         product.price = product_obj['price']
-        product.images = product_obj['images'].map { |img| Image.new(url: img) }
+        product.images = product_obj['images'].map { |img| Image.new(url: img['tempSrc']) }
 
         school_attr = product_obj['attributes'].find { |attribute| attribute['name'] == 'School' }&.value
         product.school = School.find_or_create_by(name: school_attr) if school_attr
@@ -80,7 +82,7 @@ class OrderBuilder
       product_obj['attributes'].each do |attribute|
         product.product_attributes.find_or_create_by(name: attribute['name'], value: attribute['value'])
       end
-      order_items << OrderItem.new(name: item['name'], price: item['price'],
+      order_items << OrderItem.new(name: item['name'], price: item['price'], 
                                    quantity: item['quantity'], product: product, options: item['selected_options'])
     end
     order_items
@@ -97,7 +99,6 @@ class OrderBuilder
   end
 
   def build_order(seller)
-    puts object['payment_method']
     Order.new(store_order_id: object['order_id'], subtotal: object['sub_total'],
               shipping_total: object['shipping_total'], status: object['fulfillment_status'],
               payment: object['payment_method']['name'], seller: seller)

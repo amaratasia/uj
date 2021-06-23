@@ -5,4 +5,5 @@ class Order < ApplicationRecord
   has_many :taxes
   has_many :order_items
   has_one :shipping_address
+  delegate :name, to: :shipping_address
 end

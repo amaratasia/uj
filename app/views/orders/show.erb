@@ -5,17 +5,15 @@
   <th class='col-md-1'>InternalID</th>
   <th class='col-md-2'>Name</th>
   <th class='col-md-2'>Price</th>
-  <th class='col-md-1'>URL</th>
   <th class='col-md-2'>Placed On</th>
   <th class='col-md-3'>Status</th>
   <tr>
-    <td><%= @order.order_number %></td>
-    <td><%= @order.shopify_id %></td>
-    <td><%= @order.customer_fullname %></td>
-    <td><%= @order.price %></td>
-    <td><%= link_to 'Click Here ', @order.status_url, target: '_blank' %></td>
+    <td><%= @order.id %></td>
+    <td><%= @order.store_order_id %></td>
+    <td><%= @order.name %></td>
+    <td><%= @order.subtotal %></td>
     <td><%= @order.created_at.strftime('%d-%b-%Y %T %p') %></td>
-    <td><%= @order.status.humanize %> | <%= link_to("Sync", sync_tracking_order_path(@order), method: "post") %></td>
+    <td><%= @order.status.humanize %></td>
   </tr>
 </table>
 <hr>
@@ -25,40 +23,18 @@
   <th class='col-md-2'>Address</th>
   <th class='col-md-2'>Phone</th>
   <th class='col-md-2'>City</th>
-  <th class='col-md-2'>Province</th>
   <tr>
-    <td><%= "#{@order.address.first_name} #{@order.address.last_name}" %></td>
-    <td><%= @order.address.address1 %></td>
-    <td><%= @order.address.phone %></td>
-    <td><%= @order.address.city %></td>
-    <td><%= @order.address.province %></td>
+    <td><%= "#{@order.shipping_address.name}" %></td>
+    <td><%= @order.shipping_address.address %></td>
+    <td><%= @order.shipping_address.phone %></td>
+    <td><%= @order.shipping_address.city %></td>
   </tr>
 </table>
 <hr>
-<p><b>Tracking Details</b></p>
-  <table col>
-    <th class='col-md-3'>Date</th>
-    <th class='col-md-3'>Status</th>
-    <th class='col-md-6'>Note</th>
-    <% if @order.order_tracking_details.present? %>
-      <% @order.order_tracking_details.each do |item| %>
-        <tr>
-          <td style='vertical-align:top'><%= item.created_at.strftime('%d-%b-%Y %T %p') %></td>
-          <td style='vertical-align:top'><%= item.status %></td>
-          <td style='vertical-align:top'><%= item.notes.split('\n').join('<br>').html_safe if item.notes.exclude?("shippingLabelLink")%></td>
-        </tr>
-      <% end %>
-    <% else %>
-      <tr>
-        <td style='text-align:center' colspan="3">NA</td>
-      </tr>
-    <% end %>
-  </table>
-<hr>
+
 <p><b>Item Details</b></p>
 <table>
   <table>
-    <th class='col-md-1'>Image</th>
     <th class='col-md-1'>Name</th>
     <th class='col-md-1'>PID</th>
     <th class='col-md-1'>Size</th>
@@ -67,16 +43,15 @@
     <% if params[:body] != 'false' %>
       <th class='col-md-6'>Description</th>
     <% end %>
-    <% @order.line_items.each do |item| %>
+    <% @order.order_items.each do |item| %>
     <tr>
-      <td style='vertical-align:top'><%= item.image && image_tag(item.image, size: '160') %></td>
       <td style='vertical-align:top'><%= item.name %></td>
       <td style='vertical-align:top'><%= item.product_id && link_to(item.product_id, product_path(item.product_id), target: '_blank') %></td>
-      <td style='vertical-align:top'><%= item.variant_title %></td>
+      <td style='vertical-align:top'><%= item.name %></td>
       <td style='vertical-align:top'><%= item.price %></td>
       <td style='vertical-align:top'><%= item.quantity %></td>
       <% if params[:body] != 'false' %>
-        <td style='vertical-align:top'><%= item.product && item.product.body.html_safe %></td>
+        <td style='vertical-align:top'><%= item.product && item.product.description.html_safe %></td>
       <% end %>
     </tr>
     <% end %>

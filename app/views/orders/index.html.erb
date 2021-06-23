@@ -13,8 +13,8 @@
   <%= submit_tag("Search", class: "btn btn-default") %>
 <% end %>
 <hr>
-<p> Order Total: <%= @financial_details.total || 0 %> </p>
-<p> Order Commision: <%= @financial_details.commission || 0 %> </p>
+<p> Order Total: <%#= @financial_details.total || 0 %> </p>
+<p> Order Commision: <%#= @financial_details.commission || 0 %> </p>
 <table>
   <table>
     <th class="col-md-1">ID</th>
@@ -22,20 +22,19 @@
     <th class="col-md-2">Name</th>
     <th class="col-md-1">Price</th>
     <th class="col-md-2">Status</th>
-    <th class="col-md-1">URL</th>
+    <%# <th class="col-md-1">URL</th> %>
     <th class="col-md-2">Placed On</th>
     <% @orders.each do |order| %>
     <tr>
-      <td><%= link_to order.order_number, order_path(order), target: "_blank" %></td>
-      <td><%= link_to order.shopify_id, order_path(order), target: "_blank" %></td>
-      <td><%= order.customer_fullname %></td>
-      <td><%= order.price %></td>
-      <td><%= (order.tracking_url && link_to("#{order.status.humanize} (#{order.delivery_partner})", order.tracking_url, target: "_blank")) || order.status.humanize || "Created*" %> </td>
-      <td><%= link_to 'Click Here', order.status_url, target: "_blank" %></td>
+      <td><%= link_to order.id, order_path(order), target: "_blank" %></td>
+      <td><%= order.store_order_id %></td>
+      <td><%= order.name %></td>
+      <td><%= order.subtotal %></td>
+      <td><%= order.status %> </td>
       <td><%= order.created_at.strftime("%d-%b-%Y %T %p") %></td>
     </tr>
     <% end %>
   </table>
 </table>
 
-<%== @pagy.next && pagy_bootstrap_nav(@pagy) %>
+<%#== @pagy.next && pagy_bootstrap_nav(@pagy) %>
