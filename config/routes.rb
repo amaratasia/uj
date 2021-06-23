@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'home#index'
-  
+
   namespace :webhook, only: :create do
     resources :store_hippo_events, only: [:create]
   end

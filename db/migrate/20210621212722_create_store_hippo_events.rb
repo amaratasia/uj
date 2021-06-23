@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateStoreHippoEvents < ActiveRecord::Migration[5.2]
   def change
     create_table :store_hippo_events do |t|

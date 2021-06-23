@@ -29,9 +29,9 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
+gem 'aws-sdk'
 gem 'devise'
 gem 'shopify_api'
-gem 'aws-sdk'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
@@ -50,8 +50,8 @@ gem 'pagy', '~> 3.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'rubocop'
   gem 'erb_lint'
+  gem 'rubocop'
 end
 
 group :development do
