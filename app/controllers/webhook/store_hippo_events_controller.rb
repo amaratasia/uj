@@ -8,6 +8,7 @@ module Webhook
     def create
       store_hippo_params && lms = StoreHippoEvent.new(store_hippo_params)
       if lms.save
+        OrderBuilder.new(lms.data).call
         render json: { success: true, data: lms.as_json }.to_json, status: :ok
       else
         render json: { success: false, errors: lms.errors.full_messages }.to_json, status: :ok
