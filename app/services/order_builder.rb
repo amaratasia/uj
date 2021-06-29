@@ -96,11 +96,6 @@ class OrderBuilder
   end
 
   def build_order(seller)
-    puts Order.new
-    puts "object ---- #{object['total']}"
-
-    Rails.logger.debug Order.new
-    Rails.logger.debug "object ---- #{object['total']}"
     Order.new(store_order_id: object['order_id'], subtotal: object['sub_total'], total: object['total'],
               shipping_total: object['shipping_total'], status: object['fulfillment_status'],
               payment: object['payment_method']['name'], seller: seller)
