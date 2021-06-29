@@ -3,16 +3,29 @@
 require 'uri'
 require 'net/http'
 class SmsNotification
-  def initialize(content, phone)
-    @phone = phone
-    @content = content
+  attr_reader :phone
+  def initialize(content_data, phone)
+    @phone = phone.to_s.include?("+") ? phone.to_s[3..-1] : phone.to_s
+    @phone = @phone.to_i
+    @content = content_data
   end
 
   def call
-    password = 'New@2021'
+    return nil unless [7892517159, 8884449305, 8884445923].include?(phone)
     user = 'MAFTrans'
-    url = URI("http://message.knowlarity.com/api/mt/SendSMS?user=#{user}&password=#{password}&senderid=SBKMSG&channel=Trans&DCS=0&flashsms=0&number=91#{@phone}&text=#{@content}")
-    puts url
+    authkey = '92S2Vp4uiHfcU'
+    sender = 'UFJEDU'
+    template_map = {
+      'order_created' => {
+                          content: "Dear %{name}, Thank you for placing the order %{order_number} with Uniform Junction. We have received the amount of %{order_total}.-Uniform Junction",
+                          template_id: 1707162321897752798
+                        }
+    }
+
+    data = template_map['order_created']
+    
+    url = URI("http://sms1x.knowlarity.com/api/pushsms?user=#{user}&authkey=#{authkey}&sender=#{sender}&mobile=#{phone}&summary=1&output=json&entityid=1701162079335709541&templateid=#{data[:template_id]}&#{URI.encode_www_form([["text", data[:content] %  @content]])}")
+
     http = Net::HTTP.new(url.host, url.port)
     request = Net::HTTP::Get.new(url)
 
