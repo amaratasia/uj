@@ -5,16 +5,18 @@
   <div class="form-group mb-2">
   <%= date_field('orders','min', min: '2015-05-20', max: Date.today, value: params[:orders] && params[:orders][:min], class: 'form-control') %>
 </div>
-  <label class="col-form-label">To</label>
-  <%= date_field('orders','max', min: '2015-05-20', max: Date.today, value: params[:orders] && params[:orders][:max], class: 'form-control') %>
-  <div class="form-group mx-sm-3 mb-2">
-    <%= select_tag :school_id, options_from_collection_for_select(School.all, "id", "name", params[:school_id]), include_blank: '---- Select School ----', class: 'form-control' %>
-  </div>
-  <%= submit_tag("Search", class: "btn btn-default") %>
+  
+    <label class="col-form-label">To</label>
+    <%= date_field('orders','max', min: '2015-05-20', max: Date.today, value: params[:orders] && params[:orders][:max], class: 'form-control') %>
+    <% if policy(@orders).show_school_option? %>
+      <div class="form-group mx-sm-3 mb-2">
+        <%= select_tag :school_id, options_from_collection_for_select(School.all, "id", "name", params[:school_id]), include_blank: '---- Select School ----', class: 'form-control' %>
+      </div>
+    <% end %>
+    <%= submit_tag("Search", class: "btn btn-default") %>
+  
 <% end %>
 <hr>
-<p> Order Total: <%#= @financial_details.total || 0 %> </p>
-<p> Order Commision: <%#= @financial_details.commission || 0 %> </p>
 <table>
   <table>
     <th class="col-md-1">ID</th>

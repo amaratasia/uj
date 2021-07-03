@@ -5,7 +5,10 @@ class OrdersController < ApplicationController
 
   # GET /orders or /orders.json
   def index
-    @orders = Order.all
+    @orders = current_user.orders
+    @orders = School.find(params[:school_id]).orders.order(:id) if params[:school_id].presence && policy(@orders).show_school_option?
+    @orders = @orders.where('created_at > ?', params[:orders][:min]) if params[:orders] && params[:orders][:min].presence
+    @orders = @orders.where('created_at > ?', params[:orders][:max]) if params[:orders] && params[:orders][:max].presence
   end
 
   # GET /orders/1 or /orders/1.json

@@ -11,9 +11,7 @@ class SmsNotification
   end
 
   def call
-    puts phone
-    Rails.logger.debug phone
-    Rails.logger.debug "DEBUG __--"
+    
     return nil unless [7892517159, 8884449305, 8884445923].include?(phone.to_i)
     user = 'MAFTrans'
     authkey = '92S2Vp4uiHfcU'

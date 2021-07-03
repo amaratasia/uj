@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  resources :orders
-  resources :products
+  resources :orders, only: [:index, :show]
+  resources :products, only: [:index, :show]
   devise_for :users
   root 'home#index'
 
